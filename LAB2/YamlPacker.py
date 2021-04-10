@@ -1,7 +1,5 @@
 import yaml
-from collections.abc import Iterable
-
-
+"""
 def yaml_dumps(obj):
     dict_obj = obj.__dict__
     result = str()
@@ -16,19 +14,23 @@ def yaml_dumps(obj):
         else:
             result += ' ' + str(dict_obj[key])
     return result
+"""
 
 
-class YamlPacker(object):
+class YamlPacker:
     def dump(self, obj, fp):
         with open(fp, 'w') as file:
             yaml.dump(obj, file)
 
     def dumps(self, obj):
-        return yaml_dumps(obj)
+        return yaml.dump(obj)
 
     def load(self, fp):
         with open(fp, 'r') as file:
-            return yaml.load(file)
+            return yaml.unsafe_load(file)
 
-    def loads(self):
-        pass
+    def loads(self, data):
+        return yaml.unsafe_load(data)
+
+
+

@@ -3,6 +3,7 @@ import toml
 
 class TomlPacker(object):
     def dump(self, obj, fp):
+
         with open(fp, 'w') as file:
             toml.dump(obj.__dict__, file)
 

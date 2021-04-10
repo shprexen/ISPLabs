@@ -1,7 +1,10 @@
-from main import SerialiazeEnum
+import yaml
 import pickle
 import inspect
-import dis
+import toml
+from types import CodeType, FunctionType
+
+
 class Class(object):
     def __init__(self):
         self.a = 'dfsdfsd'
@@ -10,10 +13,9 @@ class Class(object):
         pass
 
 
-def func(b: 1, c: 3, a: 5):
+def func(a, b):
     a = 7
-    print(a)
-    return a
+    print(a + b)
 
 
 def fun_to_YAML(fun):
@@ -47,6 +49,7 @@ def fun_to_pickle(func, fp):
     with open('fp', 'wb') as file:
         pickle.dump(func, file)
 
+
 def func_to_yaml(func):
     func_name = func.__code__.co_name
     func_args = func.__code__.co_varnames
@@ -57,15 +60,11 @@ def func_to_yaml(func):
     return str
 
 
-def serialize_func(func, type):
-    if type is SerialiazeEnum.JSON:
-        return fun_to_json(func)
-    if type is SerialiazeEnum.YAML:
-        return fun_to_YAML(func)
-    if type is SerialiazeEnum.TOML:
-        return fun_to_json(func)
-    if type is SerialiazeEnum.PICKLE:
-        return fun_to_json(func)
+def f(a, b, c):
+    g = a + b ** c
+    return g
 
-print(serialize_func(func, SerialiazeEnum.JSON))
 
+a = Class()
+
+print(toml.dumps(a))
