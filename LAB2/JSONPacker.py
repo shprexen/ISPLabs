@@ -1,49 +1,61 @@
+import builtins
 import json
 import inspect
 from types import CodeType, FunctionType
 
-primitive_type = (int,
-                  str,
-                  float,
-                  list,
-                  tuple,
-                  range,
-                  dict,
-                  set,
-                  bool,
-                  bytes)
+
+def is_primitive(obj):
+    return type(obj) in [int, float, str, bool, type(None), list, tuple]
 
 
-def function_to_json(func):
-    members = inspect.getmembers(func.__code__)
-    dickk = {}
+def function_to_json(obj):
+    members = inspect.getmembers(obj.__code__)
+    func_dict = {}
     for item in members:
-        if (item[0].startswith('co_')):
-            dickk[item[0]] = item[1]
-    dickk['co_code'] = list(dickk["co_code"])
-    dickk['co_lnotab'] = list(dickk["co_lnotab"])
-    return dickk
+        if item[0].startswith('co_'):
+            func_dict[item[0]] = item[1]
+    func_dict['co_code'] = list(func_dict["co_code"])
+    func_dict['co_lnotab'] = list(func_dict["co_lnotab"])
 
+    func = {'code': func_dict}
 
-def json_to_function(dickk):
-    aue = CodeType(dickk['co_argcount'],
-                   dickk['co_posonlyargcount'],
-                   dickk['co_kwonlyargcount'],
-                   dickk['co_nlocals'],
-                   dickk['co_stacksize'],
-                   dickk['co_flags'],
-                   bytes(dickk['co_code']),
-                   tuple(dickk['co_consts']),
-                   tuple(dickk['co_names']),
-                   tuple(dickk['co_varnames']),
-                   dickk['co_filename'],
-                   dickk['co_name'],
-                   dickk['co_firstlineno'],
-                   bytes(dickk['co_lnotab']),
-                   tuple(dickk['co_freevars']),
-                   tuple(dickk['co_cellvars']))
-    func = FunctionType(aue, globals())
+    function_globals = dict()
+    name = func['code']['co_name']
+    function_globals[name] = name + '<function>'
+    global_pairs = obj.__globals__.items()
+    for (key, value) in global_pairs:
+        if is_primitive(value):
+            function_globals[key] = value
+    func['globals'] = function_globals
     return func
+
+
+def json_to_function(dict_func):
+    function_globals = dict_func['globals']
+    function_globals['__builtins__'] = builtins
+    code_args = dict_func['code']
+
+    my_obj = CodeType(code_args['co_argcount'],
+                   code_args['co_posonlyargcount'],
+                   code_args['co_kwonlyargcount'],
+                   code_args['co_nlocals'],
+                   code_args['co_stacksize'],
+                   code_args['co_flags'],
+                   bytes(code_args['co_code']),
+                   tuple(code_args['co_consts']),
+                   tuple(code_args['co_names']),
+                   tuple(code_args['co_varnames']),
+                   code_args['co_filename'],
+                   code_args['co_name'],
+                   code_args['co_firstlineno'],
+                   bytes(code_args['co_lnotab']),
+                   tuple(code_args['co_freevars']),
+                   tuple(code_args['co_cellvars']))
+
+    temp = FunctionType(my_obj, function_globals, code_args['co_name'])
+    name = code_args['co_name']
+    function_globals[name] = temp
+    return FunctionType(my_obj, function_globals, name)
 
 
 class JsonPacker(object):
@@ -52,7 +64,7 @@ class JsonPacker(object):
             if isinstance(obj, FunctionType):
                 obj_dict = function_to_json(obj)
                 file.write(json.dumps(obj_dict, indent=4))
-            elif type(obj) in primitive_type:
+            elif is_primitive(obj):
                 file.write(json.dumps(obj))
             else:
                 file.write(self.dumps(obj))
@@ -61,7 +73,7 @@ class JsonPacker(object):
         if isinstance(obj, FunctionType):
             obj_dict = function_to_json(obj)
             return json.dumps(obj_dict, indent=2)
-        elif type(obj) in primitive_type:
+        elif is_primitive(obj):
             return json.dumps(obj)
         else:
             return json.dumps(obj, default=lambda x: x.__dict__, sort_keys=True, indent=4)
@@ -71,7 +83,7 @@ class JsonPacker(object):
         with open(fp, 'r') as file:
             obj_dict = json.loads(file.read())
             try:
-                if "co_firstlineno" in obj_dict.keys():
+                if "code" in obj_dict.keys():
                     return json_to_function(obj_dict)
                 else:
                     with open(fp, 'r') as f:
@@ -86,6 +98,6 @@ class JsonPacker(object):
             if "co_firstlineno" in obj_dict.keys():
                 return json_to_function(obj_dict)
             else:
-                json.loads(data)
+                return json.loads(data)
         except:
             return json.loads(data)
