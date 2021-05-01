@@ -49,8 +49,8 @@
             1,
             2
         ],
-        "co_filename": "/home/shprexen/PycharmProjects/Serial/TestObjects.py",
-        "co_firstlineno": 14,
+        "co_filename": "/home/shprexen/PycharmProjects/Serial/Tests/test_objects.py",
+        "co_firstlineno": 25,
         "co_flags": 67,
         "co_freevars": [],
         "co_kwonlyargcount": 0,
@@ -75,10 +75,11 @@
     },
     "globals": {
         "fibonacci": "fibonacci<function>",
-        "__name__": "TestObjects",
+        "__name__": "test_objects",
         "__doc__": null,
         "__package__": "",
-        "__file__": "/home/shprexen/PycharmProjects/Serial/TestObjects.py",
-        "__cached__": "/home/shprexen/PycharmProjects/Serial/__pycache__/TestObjects.cpython-38.pyc"
+        "__file__": "/home/shprexen/PycharmProjects/Serial/Tests/test_objects.py",
+        "__cached__": "/home/shprexen/PycharmProjects/Serial/Tests/__pycache__/test_objects.cpython-38.pyc",
+        "global_value": 5
     }
 }
