@@ -1,85 +1,51 @@
 {
     "code": {
-        "co_argcount": 1,
+        "co_argcount": 0,
         "co_cellvars": [],
         "co_code": [
-            124,
-            0,
-            100,
-            1,
-            107,
-            6,
-            114,
-            12,
-            100,
-            2,
-            83,
-            0,
             116,
             0,
-            124,
-            0,
-            100,
-            2,
-            24,
-            0,
-            131,
-            1,
             116,
-            0,
-            124,
-            0,
-            100,
-            3,
-            24,
-            0,
+            1,
             131,
             1,
-            23,
+            1,
+            0,
+            100,
             0,
             83,
             0
         ],
         "co_consts": [
-            null,
-            [
-                1,
-                2
-            ],
-            1,
-            2
+            null
         ],
-        "co_filename": "/home/shprexen/PycharmProjects/Serial/Tests/test_objects.py",
-        "co_firstlineno": 25,
+        "co_filename": "/home/shprexen/PycharmProjects/Serial/sandbox.py",
+        "co_firstlineno": 6,
         "co_flags": 67,
         "co_freevars": [],
         "co_kwonlyargcount": 0,
         "co_lnotab": [
             0,
-            1,
-            8,
-            1,
-            4,
             1
         ],
-        "co_name": "fibonacci",
+        "co_name": "func",
         "co_names": [
-            "fibonacci"
+            "print",
+            "a"
         ],
-        "co_nlocals": 1,
+        "co_nlocals": 0,
         "co_posonlyargcount": 0,
-        "co_stacksize": 4,
-        "co_varnames": [
-            "n"
-        ]
+        "co_stacksize": 2,
+        "co_varnames": []
     },
     "globals": {
-        "fibonacci": "fibonacci<function>",
-        "__name__": "test_objects",
+        "func": "func<function>",
+        "__name__": "__main__",
         "__doc__": null,
-        "__package__": "",
-        "__file__": "/home/shprexen/PycharmProjects/Serial/Tests/test_objects.py",
-        "__cached__": "/home/shprexen/PycharmProjects/Serial/Tests/__pycache__/test_objects.cpython-38.pyc",
-        "global_value": 5
+        "__package__": null,
+        "__spec__": null,
+        "__file__": "/home/shprexen/PycharmProjects/Serial/sandbox.py",
+        "__cached__": null,
+        "a": 5
     }
 }

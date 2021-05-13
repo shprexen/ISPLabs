@@ -12,13 +12,12 @@ class SerialiazeEnum:
 
 
 class Packer(object):
-    @staticmethod
     def create_serializer(serialize_type):
-        if serialize_type is SerialiazeEnum.YAML:
+        if serialize_type == SerialiazeEnum.YAML:
             return YamlPacker()
-        if serialize_type is SerialiazeEnum.PICKLE:
+        if serialize_type == SerialiazeEnum.PICKLE:
             return PicklePacker()
-        if serialize_type is SerialiazeEnum.TOML:
+        if serialize_type == SerialiazeEnum.TOML:
             return TomlPacker()
-        if serialize_type is SerialiazeEnum.JSON:
+        if serialize_type == SerialiazeEnum.JSON:
             return JsonPacker()
