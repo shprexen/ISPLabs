@@ -3,10 +3,8 @@ venv
 serial.egg-info
 dist
 build
-*/__pycache__
+**/__pycache__
 sandbox.py
 s1.py
 s2.py
 .idea
-__pycache__
-serializers/__pycache__/
