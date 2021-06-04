@@ -1,0 +1,28 @@
+{% load static %}
+
+<style>
+    .hello-msg{
+        font-size: 18px;
+        color: white;
+        margin-right: 20px;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+      <img class="profile-pic" style="max-width: 70px ;max-height:90px;margin: 0 auto;border-radius: 50%;" src="{{request.user.student.profile_pic.url}}" >
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'account' %}">Settings</a>
+      </li>
+    </ul>
+  </div>
+
+    <span class="hello-msg">Hello, {{ request.user }}</span>
+    <span ><a class="hello-msg" href="{% url 'logout' %}">Log out</a> </span>
+</nav>

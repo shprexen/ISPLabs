@@ -1,0 +1,74 @@
+{%  extends 'accounts/main.html' %}
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md">
+       <div style="text-align:center"><h2>Today Schedule.</h2></div>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Lesson</th>
+					<th>LessonTime</th>
+                    <th>Type</th>
+					<th>Full name</th>
+					<th>Audience</th>
+				</tr>
+                {% for lesson in lessons %}
+                    <tr>
+                    <td>{{ lesson.subject }}</td>
+                    <td>{{ lesson.lessonTime}}</td>
+                    <td>{{ lesson.lessonType }}</td>
+                    <td>{{ lesson.employee }}</td>
+                    <td>{{ lesson.audience }}</td>
+                    </tr>
+                {% endfor %}
+			</table>
+		</div>
+        <div style="text-align:center"><h2>Tomorrow Schedule.</h2></div>
+        <div class="card card-body">
+            <table class="table table-sm">
+				<tr>
+					<th>Lesson</th>
+					<th>LessonTime</th>
+                    <th>Type</th>
+					<th>Full name</th>
+					<th>Audience</th>
+				</tr>
+                {% for lesson in tomorrow_lessons %}
+                    <tr>
+                    <td>{{ lesson.subject }}</td>
+                    <td>{{ lesson.lessonTime}}</td>
+                    <td>{{ lesson.lessonType }}</td>
+                    <td>{{ lesson.employee }}</td>
+                    <td>{{ lesson.audience }}</td>
+                    </tr>
+                {% endfor %}
+			</table>
+        </div>
+        <div style="text-align:center"><h2>Exam Schedule.</h2></div>
+        <div class="card card-body">
+            <table class="table table-sm">
+				<tr>
+					<th>Exam</th>
+                    <th>Date</th>
+					<th>ExamTime</th>
+                    <th>Type</th>
+					<th>Full name</th>
+					<th>Audience</th>
+				</tr>
+                {% for exam in exams %}
+                    <tr>
+                    <td>{{ exam.subject }}</td>
+                        <td>{{ exam.datetime }}</td>
+                    <td>{{ exam.lessonTime}}</td>
+                    <td>{{ exam.lessonType }}</td>
+                    <td>{{ exam.employee }}</td>
+                    <td>{{ exam.audience }}</td>
+                    </tr>
+                {% endfor %}
+			</table>
+        </div>
+	</div>
+</div>
+{% endblock content %}
