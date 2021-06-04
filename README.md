@@ -1,3 +1,3 @@
-#LAB2 InAction
+PYTHON LABS
 
 
